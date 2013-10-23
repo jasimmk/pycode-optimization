@@ -1,5 +1,29 @@
 """
 Comparison of Various Prime number Generators, Prime Number Check algorithms
+
+$python check_prime_number.py
+Elapsed Time for check_prime: 28120.0003624 microseconds
+
+Prime?: False
+Elapsed Time for check_prime_opt: 9.99927520752 microseconds
+
+Prime?: False
+Elapsed Time for check_prime_simple: 0.0 microseconds
+
+Prime?: False
+Elapsed Time for get_primes_best: 0.0 microseconds
+Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
+ 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
+157, 163, 167, 173, 179, 181, 191, 193, 197, 199]
+Elapsed Time for get_primes_opt: 130.000114441 microseconds
+Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
+ 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
+157, 163, 167, 173, 179, 181, 191, 193, 197, 199]
+Elapsed Time for get_primes_fastest: 20.0009346008 microseconds
+Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
+ 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
+157, 163, 167, 173, 179, 181, 191, 193, 197, 199]
+
 """
 
 import time
@@ -11,9 +35,13 @@ def timed(func):
     Wrapper for Functions to print Time Consumed by each function
     """
     def wrapped(*args, **kwargs):
+        ITER = 100
         start = time.time()
-        result = func(args, kwargs)
-        print "Elapsed Time for %s: %s" % (func.__name__, time.time() - start)
+        for x in xrange(ITER):
+            result = func(*args, **kwargs)
+
+        print "Elapsed Time for %s: %s microseconds"\
+            % (func.__name__, (time.time() - start) * 1000000 / ITER)
         return result
     return wrapped
 
@@ -140,62 +168,11 @@ def get_primes_best(a):
 
 if __name__ == "__main__":
     def start():
-        ITER = 100
-        y = ""
-        start = time.time()
-        for i in xrange(ITER):
-                y = check_prime(5000)
-        end = time.time()
-        print (
-            'Time per iteration for check_prime = %s microseconds ' %
-            ((end - start) * 1000000 / ITER))
-        print "Prime?: %s" % y
-
-        z = ""
-        startz = time.time()
-        for i in xrange(ITER):
-                z = check_prime_opt(5000)
-        endz = time.time()
-        print (
-            'Time per iteration for check_prime_opt = %s microseconds ' %
-            ((endz - startz) * 1000000 / ITER))
-        print "Prime?: %s" % z
-
-        m = ""
-        startm = time.time()
-        for i in xrange(ITER):
-                m = check_prime_simple(5000)
-        endm = time.time()
-        print (
-            'Time per iteration for check_prime_simple = %s microseconds ' %
-            ((endm - startm) * 1000000 / ITER))
-        print "Prime?: %s" % m
-
-        startm = time.time()
-        for i in xrange(ITER):
-                n = [x for x in get_primes_best(200)]
-        endm = time.time()
-        print (
-            'Time per iteration for get_primes_best = %s microseconds ' %
-            ((endm - startm) * 1000000 / ITER))
-        print "Primes: %s" % n
-
-        startm = time.time()
-        for i in xrange(ITER):
-                n = get_primes_opt(200)
-        endm = time.time()
-        print (
-            'Time per iteration for get_primes_opt = %s microseconds ' %
-            ((endm - startm) * 1000000 / ITER))
-        print "Primes: %s" % n
-
-        startm = time.time()
-        for i in xrange(ITER):
-                n = get_primes_fastest(200)
-        endm = time.time()
-        print (
-            'Time per iteration for get_primes_fastest = %s microseconds ' %
-            ((endm - startm) * 1000000 / ITER))
-        print "Primes: %s" % n
+        print "\nPrime?: %s" % timed(check_prime)(5000)
+        print "\nPrime?: %s" % timed(check_prime_opt)(5000)
+        print "\nPrime?: %s" % timed(check_prime_simple)(5000)
+        print "Primes: %s" % [x for x in timed(get_primes_best)(200)]
+        print "Primes: %s" % timed(get_primes_opt)(200)
+        print "Primes: %s" % timed(get_primes_fastest)(200)
     #cProfile.run('start()')
     start()
