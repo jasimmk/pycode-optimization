@@ -1,0 +1,12 @@
+1. Creating Decorator for Time Consumed
+2. Use of 'for.........else', to break out of loop
+3. Breaking outerloop, for a case in Inner loop
+4. use isinstance instead of type()
+5. using list instead of set for appending and iteration saves good time.
+6. for comparison use 'is' instead of '==' and is not istead of '!='
+7. list comprehention speeds up list creation
+8. use xrange instead of range
+9. make all in functions, rather than just code interpreted eg:main()
+10. oldstyle classes will cause some operations costier
+11. Use __slots__ for mutex, it saves time and space in classes
+12. use map instead of for loop to execute functions on many values

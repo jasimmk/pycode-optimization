@@ -1,0 +1,20 @@
+//http://blog.dhananjaynene.com/2008/07/performance-comparison-c-java-python-ruby-jython-jruby-groovy/
+use is not instead of != and is instead of ==
+use xrange instead of range
+
+gained a 10 ms optimization
+
+
+usage of python np.arange incremented time by 22ms
+
+made main() as function then executed -- 4ms saved
+
+cprofile import -- 5ms second extra
+
+oldstyle classes will cause 110ms extra per iteration
+
+        # for i in xrange(size):
+        #     current = Person(i)
+
+2 ms optimization with for current in map(Person, xrange(size))
+3 ms optimization with  __slots__ 
