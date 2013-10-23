@@ -2,24 +2,33 @@
 Comparison of Various Prime number Generators, Prime Number Check algorithms
 
 $python check_prime_number.py
-Elapsed Time for check_prime: 28120.0003624 microseconds
+Elapsed Time for check_prime: 28270.0014114 microseconds
 
 Prime?: False
-Elapsed Time for check_prime_opt: 9.99927520752 microseconds
+Elapsed Time for check_prime_opt: 0.0 microseconds
 
 Prime?: False
 Elapsed Time for check_prime_simple: 0.0 microseconds
 
 Prime?: False
-Elapsed Time for get_primes_best: 0.0 microseconds
+Elapsed Time for check_prime: 20199.9998093 microseconds
+
+Prime?: True
+Elapsed Time for check_prime_opt: 9.99927520752 microseconds
+
+Prime?: True
+Elapsed Time for check_prime_simple: 10.0016593933 microseconds
+
+Prime?: True
+Elapsed Time for get_primes_best: 9.99927520752 microseconds
 Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
  71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
 157, 163, 167, 173, 179, 181, 191, 193, 197, 199]
-Elapsed Time for get_primes_opt: 130.000114441 microseconds
+Elapsed Time for get_primes_opt: 120.000839233 microseconds
 Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
  71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
 157, 163, 167, 173, 179, 181, 191, 193, 197, 199]
-Elapsed Time for get_primes_fastest: 20.0009346008 microseconds
+Elapsed Time for get_primes_fastest: 30.0002098083 microseconds
 Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
  71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151,
 157, 163, 167, 173, 179, 181, 191, 193, 197, 199]
@@ -171,6 +180,9 @@ if __name__ == "__main__":
         print "\nPrime?: %s" % timed(check_prime)(5000)
         print "\nPrime?: %s" % timed(check_prime_opt)(5000)
         print "\nPrime?: %s" % timed(check_prime_simple)(5000)
+        print "\nPrime?: %s" % timed(check_prime)(4093)
+        print "\nPrime?: %s" % timed(check_prime_opt)(4093)
+        print "\nPrime?: %s" % timed(check_prime_simple)(4093)        
         print "Primes: %s" % [x for x in timed(get_primes_best)(200)]
         print "Primes: %s" % timed(get_primes_opt)(200)
         print "Primes: %s" % timed(get_primes_fastest)(200)
