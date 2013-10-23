@@ -7,25 +7,26 @@ import functools
 
 
 def timed(func):
-    """Print Time for Function Execution"""
-
+    """
+    Wrapper for Functions to print Time Consumed by each function
+    """
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapped(*args, **kwargs):
+        ITER = 100
         start = time.time()
-        result = func(*args, **kwargs)
-        elapsed = time.time() - start
-        print "Execution time for %s is %f" % (func.__name__, elapsed)
+        for x in xrange(ITER):
+            result = func(*args, **kwargs)
+
+        print "Elapsed Time for %s: %s microseconds"\
+            % (func.__name__, (time.time() - start) * 1000000 / ITER)
         return result
+    return wrapped
 
-    return wrapper
 
-
-@timed
 def list_count_set(huge_list):
     return list(set([x for x in huge_list if huge_list.count(x) > 1]))
 
 
-@timed
 def list_multi_list_compare(huge_list):
     non_dup_list = []
     dup_list = []
@@ -37,7 +38,6 @@ def list_multi_list_compare(huge_list):
     return dup_list
 
 
-@timed
 def list_multi_list_compare_opt(huge_list):
     non_dup_list = []
     dup_list = []
@@ -55,10 +55,10 @@ if __name__ == "__main__":
         #l += [x for x in range(1, 100, 3)]
         #l += [x for x in range(100, 2000, 5)]
 
-        l = [x for x in range(0, 100000)] + [x for x in range(0, 200, 3)]
+        l = [x for x in range(0, 10000)] + [x for x in range(0, 200, 3)]
         print "length of list: %s" % (len(l))
-        list_multi_list_compare_opt(l)
-        list_count_set(l)
-        list_multi_list_compare(l)
+        timed(list_multi_list_compare_opt)(l)
+        timed(list_count_set)(l)
+        timed(list_multi_list_compare)(l)
 
     main_func()

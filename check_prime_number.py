@@ -37,12 +37,13 @@ Primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
 
 import time
 import math
-
+import functools
 
 def timed(func):
     """
     Wrapper for Functions to print Time Consumed by each function
     """
+    @functools.wraps(func)
     def wrapped(*args, **kwargs):
         ITER = 100
         start = time.time()
@@ -182,7 +183,7 @@ if __name__ == "__main__":
         print "\nPrime?: %s" % timed(check_prime_simple)(5000)
         print "\nPrime?: %s" % timed(check_prime)(4093)
         print "\nPrime?: %s" % timed(check_prime_opt)(4093)
-        print "\nPrime?: %s" % timed(check_prime_simple)(4093)        
+        print "\nPrime?: %s" % timed(check_prime_simple)(4093)
         print "Primes: %s" % [x for x in timed(get_primes_best)(200)]
         print "Primes: %s" % timed(get_primes_opt)(200)
         print "Primes: %s" % timed(get_primes_fastest)(200)
